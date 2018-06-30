@@ -12,7 +12,7 @@ router.get("/board", (req, res) => {
     console.log(posts);
     res.render("board", { posts: posts });
   });
-})
+});
 
 router.get("/signup", (req, res, next) => {
   res.render("signup");
@@ -20,7 +20,6 @@ router.get("/signup", (req, res, next) => {
 
 router.post("/signup", (req, res) => {
   db.User.create({
-
     // hard coded user
     // username: "MichaelScott",
     // password: "dundermifflin"
@@ -28,20 +27,19 @@ router.post("/signup", (req, res) => {
     // dynamic user
     username: req.body.username,
     password: req.body.password
-
-  }).then(user =>{
+  }).then(user => {
     // confirmation + display user
     // res.status(200).json({
     //   msg: "Account created",
     //   user: user
     // });
-    res.render("account_created");
+    res.render("account_created", { user: user });
   });
 });
 
 router.get("/login", (req, res) => {
   res.render("login");
-})
+});
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
